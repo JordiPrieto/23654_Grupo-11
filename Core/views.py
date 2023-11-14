@@ -9,8 +9,9 @@ def index(request):
 def productos(request):
     return render(request,'Core/productos.html')
 
-def producto(request, item):
+def producto(request, productos_id):
     context = {
-        'item' : item
+        'productos_id' : productos_id
         }
     return render(request, 'Core/producto.html', context)
+
