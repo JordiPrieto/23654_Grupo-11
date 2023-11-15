@@ -15,3 +15,5 @@ def producto(request, producto_id):
         }
     return render(request, 'Core/producto.html', context)
 
+def register_product(request):
+    return render(request, "Core/register_product.html")
