@@ -27,12 +27,19 @@
     <section class="py-5" id="special">
         <div class="container">
             <div class="title text-center py-5">
-                <h2 class="position-relative d-inline-block">Register a new product</h2>
+                <h2 class="position-relative d-inline-block">Registre un nuevo producto</h2>
             </div>
             <div class="special-list row g-0">
                 <div class="col-md-6 col-lg-4 col-xl-3 p-2 card">
                     <div class="register_product_form">
-                        
+                        <form method="post" action="{% url 'register_product_form' %}">
+            
+                            {% csrf_token %} <!-- required for a POST -->
+                            <div class="register_product_form">
+                                {{ register_product.as_p}} <!-- the .as_p treats each item of the form a being inside a <p> </p> -->
+                            </div>
+                            <input type="submit" value="Guardar Producto">
+                        </form>
                     </div>
                     <div class="text-center border-top">
                         
