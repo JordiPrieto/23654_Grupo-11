@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .forms import ProductResgister
 
 # Create your views here.
 
@@ -16,4 +17,12 @@ def producto(request, producto_id):
     return render(request, 'Core/producto.html', context)
 
 def register_product(request):
-    return render(request, "Core/register_product.html")
+    if request.method == "POST":
+        form =ProductResgister(request.POST)
+    else:
+        form =ProductResgister()
+    
+    context = {
+        'register_product': form
+    }
+    return render(request, "Core/register_product.html", context)
