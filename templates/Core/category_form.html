@@ -1,0 +1,24 @@
+{% extends "Core/base.html" %}
+
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'Core/css/category_form.css' %}">
+{% endblock %}
+
+{% block title %}Category Registry{% endblock %}
+{% block section_title %}Welcome{% endblock %}
+{% block content %}
+    <h3>Register a new Category</h3>
+
+    <form method="post" action="{% url 'category_form' %}">
+        <!-- <input type="Some Text"> -->
+        <!-- <input type="submit" value="Save"> -->
+        {% csrf_token %} <!-- required for a POST -->
+        <div class="category_form">
+            {{ form.as_p}} <!-- the .as_p treats each item of the form a being inside a <p> </p> -->
+        </div>
+        <input type="submit" value="Register Category">
+    </form>
+
+{% endblock %}

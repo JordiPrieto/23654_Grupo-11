@@ -1,0 +1,44 @@
+{% extends "Core/base.html" %}
+
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'Core/css/category_list.css' %}">
+{% endblock %}
+
+{% block title %}List of product Categories{% endblock %}
+{% block section_title %}Welcome{% endblock %}
+{% block content %}
+    {% if sponsor %}
+        <p style="color:royalblue">Thank you for your sponsorship</p>
+
+    {% else %}
+        <p style="color: green;">Please sponsor my site</p>
+    {% endif %}
+
+    <p>Current timeline: <b>{{today | date}}</b></p>
+    <h2>List of Categories</h2>
+    <h3>Categories: </h3>
+    <ul>
+        {% for category in category_list %}
+            <li>
+                {% filter title %}
+                    <p>Name: {{category.category_name | upper}}</p>
+                    <p>Tags: 
+                        {% for tag in category_tag %}
+                        {{category_tag.tag}}
+                        {% endfor %}
+                    </p>
+                {% endfilter %}
+            </li>
+        {% empty %}
+            <p> No Categories found </p>    
+        {% endfor %}
+    </ul>
+        
+    {% if category_list.count > 0 %}
+        <p> Number of Categoryes: {{category_list.count}}</p>
+    {% else %}
+        <p> No categories registered </p>
+    {% endif %}
+{% endblock %}
