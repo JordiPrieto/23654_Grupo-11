@@ -1,5 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
+from .models import Category, Employee
 
 
 class ProductResgister(forms.Form):
@@ -20,7 +21,7 @@ class ProductResgister(forms.Form):
     image = forms.URLField(label = "URL de la imagen: ", required=False)
 
     def clean_age(self):
-        if self.cleaned_data["pricce"] < 0:
+        if self.cleaned_data["price"] < 0:
             raise ValidationError("Un producto no puede tener un precio negativo")
         return self.cleaned_data["price"]
 
@@ -30,3 +31,27 @@ class ProductResgister(forms.Form):
         return self.cleaned_data
 
 
+class RegisterCategory(forms.ModelForm):    
+
+    class Meta:
+        model = Category
+        fields = '__all__'
+
+    def clean_category_name(self):
+        if len(self.cleaned_data['category_name']) < 1:
+            raise ValidationError('Category name cannot be empty')
+
+        return self.cleaned_data['category_name']
+    
+    
+class RegisterEmployee(forms.ModelForm):
+
+    class Meta:
+        model = Employee
+        fields = '__all__'
+
+    def clean_employee_number(self):
+        if len(self.cleaned_data['employee_number']) < 1:
+            raise ValidationError('Employee number must be a unique positive number')
+        
+        return self.cleaned_data['employee_number']
