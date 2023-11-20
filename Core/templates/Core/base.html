@@ -21,10 +21,12 @@
             <a class="navbar-brand d-flex justify-content-between align-items-center order-lg-0" href="{% url 'index' %}"><img src="{% static 'Core/img/faviconorange.svg' %}" alt="site icon" >
             <span>BaxTech</span></a>
             <div class="order-lg-2 nav-btns">
+                <a href="{% url 'login' %}">
                 <button type="button" class="btn btn-light" style="background-color:#f9864d";>
                     <i class="fa-solid fa-user"></i>
                     <span>Iniciar sesion</span>
                 </button>
+                </a>
                 <button type="button" class="btn btn-dark">
                     <i class="fa-solid fa-user"></i>
                     <span>Registrarse</span>
