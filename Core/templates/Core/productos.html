@@ -1,0 +1,37 @@
+
+{% extends "Core/base.html" %}
+
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'Core/css/products.css' %}">
+{% endblock %}
+
+{% block title %}Lista de productos{% endblock %}
+{% block section_title %}Baxtech{% endblock %}
+{% block content %}
+
+    <h3>Productos: </h3>
+    <ul>
+        {% for product in products %}
+            <li>
+                {% filter title %}
+                    <p>Name: {{product.prod_name | upper}}</p>
+                    <p>Tags: 
+                        {% for tag in category_tag %}
+                        {{product_tag.tag}}
+                        {% endfor %}
+                    </p>
+                {% endfilter %}
+            </li>
+        {% empty %}
+            <p> No Categories found </p>    
+        {% endfor %}
+    </ul>
+        
+    {% if products.count > 0 %}
+        <p> Numbero de Productos: {{products.count}}</p>
+    {% else %}
+        <p> No hay productos registrados </p>
+    {% endif %}
+{% endblock %}

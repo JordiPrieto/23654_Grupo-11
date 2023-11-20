@@ -16,7 +16,7 @@
         <!-- <input type="submit" value="Save"> -->
         {% csrf_token %} <!-- required for a POST -->
         <div class="category_form">
-            {{ form.as_p}} <!-- the .as_p treats each item of the form a being inside a <p> </p> -->
+            {{ CategoryCreateView.as_p}} <!-- the .as_p treats each item of the form a being inside a <p> </p> -->
         </div>
         <input type="submit" value="Register Category">
     </form>
