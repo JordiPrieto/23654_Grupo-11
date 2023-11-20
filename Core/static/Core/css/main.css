@@ -84,6 +84,18 @@ body{
     z-index: 1;
 }
 
+/* form */
+.contact-bg{
+    background-color: #e8edf0;
+}
+.form-btn {
+    background-color: var(--orange)!important;
+    color: #fff!important;
+    border-color: #fff!important;
+}
+.form-btn:hover{
+    border-color: rgb(85, 85, 85)!important
+}
 /* footer */
 footer .brand{
     font-family: "brand";

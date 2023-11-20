@@ -1,0 +1,13 @@
+{% for campo in form %}
+    <div class="form-group">
+        <label for="" class="form-label">{{campo.label}}</label>
+        <div class="form-control">{{campo}}</div>
+    </div>
+    <div>{{campo.errors}}</div>
+{% endfor %}
+<div class="row mt-3">
+    <div class="col-12">
+        <input type="submit" value="Guardar" class="btn btn-success">
+        <a href="{% url 'categoria' %}" class="btn btn-secondary">Cancelar</a>        
+    </div>
+</div>

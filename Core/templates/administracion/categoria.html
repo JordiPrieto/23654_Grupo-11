@@ -1,0 +1,52 @@
+{% extends 'administracion/base.html' %}
+{% load static%}
+{% block titulo %}Categorias Productos{% endblock%}
+
+{% block contenido %}
+<nav aria-label="breadcrumb" style="margin-top:15px;">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{%url 'categoria'%}">Administracion</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Categorias</li>
+    </ol>
+  </nav>
+
+<div class="card" style="margin-top:15px;">
+    <div class="card-body">
+        <a name="" id="" class="btn btn-success" href="{%url 'categoria_nuevo'%}" role="button"> <i class="fa-solid fa-circle-plus"></i> Nuevo</a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Tag</th>
+                    <th>Activo</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for categoria in categorias %}
+                    <tr>
+                        <td>{{categoria.id}}</td>
+                        <td>{{categoria.category_name}}</td>
+                        <td>
+                            {% for tag in categoria.category_tags.all %}
+                                {{ tag.tag_name }}
+                                {% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        </td>
+                        <td>{{categoria.active}}</td>
+                        <td>
+                            <a href="{%url 'categorias_editar' categoria.id%}" title="Editar" class="btn btn-primary"><i class="fas fa-pencil"></i></a>
+                            <a href="#" title="Eliminar" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer text-muted">
+        Categorias
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'administracion/base.html' %}
+{% block titulo %}Nueva categoria{% endblock%}
+
+{% block contenido %}
+<h1 class="mt-4">Categorias cursos</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item"><a href="{% url 'categoria' %}">Administracion</a></li>
+    <li class="breadcrumb-item active">Nueva Categoriaa</li>
+</ol>
+
+
+<div class="card">
+    <div class="card-header">Creacion de categoría</div>
+    <div class="card-body">
+        <form method="post" class="needs-validation" novalidate>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="row mt-3">
+                <div class="col-12">
+                    <button type="submit" class="btn btn-success">Guardar</button>
+                    <a href="{% url 'categoria' %}" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
