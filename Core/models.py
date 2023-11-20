@@ -5,6 +5,8 @@ from django.db import models
 class Tag(models.Model):
     tag_name = models.CharField(max_length=15, verbose_name='Tag', unique=True, null=True )
     active = models.BooleanField(default=True)
+    def __str__(self) -> str:
+        return self.tag_name
 
 
 class Category(models.Model):
