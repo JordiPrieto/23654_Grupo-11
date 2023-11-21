@@ -1,0 +1,12 @@
+{% extends 'administracion/base.html' %}
+{% block titulo %}Editar Producto{% endblock %}
+
+{% block contenido %}
+    <h1 class="mt-4">Editar Producto</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <a href="{% url 'categoria' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+{% endblock %}

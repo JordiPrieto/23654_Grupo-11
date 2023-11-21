@@ -25,7 +25,7 @@ class Product(models.Model):
     price = models.FloatField(verbose_name="Price", default=0)
     visible = models.BooleanField(verbose_name="Visible", default=False)
     active = models.BooleanField(default=True, verbose_name="Active")
-    description = models.CharField(max_length=300, verbose_name='Description', null=True)
+    description = models.CharField(max_length=300, verbose_name='Description', null=True, blank=True)
     # image = models.URLField(verbose_name="image", null=True)
     image = models.ImageField(verbose_name="image:",upload_to="products_img",null=True)
 

@@ -1,0 +1,60 @@
+{% extends 'administracion/base.html' %}
+{% block titulo %}Productos{% endblock%}
+{% block contenido %}
+<nav aria-label="breadcrumb" style="margin-top:15px;">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{%url 'administracion'%}">Administracion</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Productos</li>
+    </ol>
+  </nav>
+
+<div class="card" style="margin-top:15px;">
+    <div class="card-body">
+        <a name="" id="" class="btn btn-success" href="{%url 'producto_nuevo'%}" role="button"> <i class="fa-solid fa-circle-plus"></i> Nuevo</a>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Tag</th>
+                    <th>Categoria</th>
+                    <th>Precio</th>
+                    <th>Visible</th>
+                    <th>Stock</th>
+                    <th>Descripcion</th>
+                    <th>Imagen</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                    <tr>
+                        <td>{{product.id}}</td>
+                        <td>{{product.prod_name}}</td>
+                        <td>
+                            {% for tag in product.product_tags.all %}
+                                {{ tag.tag_name }}
+                                {% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        </td>
+                        <td>{{product.category}}</td>
+                        <td>{{product.price}}</td>
+                        <td>{{product.visible}}</td>
+                        <td>{{product.stock}}</td>
+                        <td>{{product.description}}</td>
+                        <td><img src="{{ product.image.url }}" alt="{{product.prod_name}}" style="max-width: 50px; max-height: 50px;"></td>
+                        <td>
+                            <a href="{%url 'producto_editar' product.id%} " title="Editar" class="btn btn-primary"><i class="fas fa-pencil"></i></a>
+                            <a href="{%url 'producto_eliminar' product.id%}" title="Eliminar" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+        <div class="card-footer text-muted">
+        Productos
+        </div>
+</div>
+{% endblock %}

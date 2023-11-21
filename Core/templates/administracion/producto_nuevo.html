@@ -1,0 +1,26 @@
+{% extends 'administracion/base.html' %}
+{% block titulo %}Nuevo Producto{% endblock%}
+
+{% block contenido %}
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item"><a href="{% url 'administracion' %}">Administracion</a></li>
+    <li class="breadcrumb-item active">Nuevo Producto</li>
+</ol>
+
+
+<div class="card">
+    <div class="card-header">Crear Producto</div>
+    <div class="card-body">
+        <form method="post" class="needs-validation" novalidate enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="row mt-3">
+                <div class="col-12">
+                    <button type="submit" class="btn btn-success">Guardar</button>
+                    <a href="{% url 'producto' %}" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
