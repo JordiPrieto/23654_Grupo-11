@@ -1,6 +1,6 @@
 from django import forms 
 from django.core.exceptions import ValidationError
-from .models import Category, Employee,Product
+from .models import Category, Employee,Product,Tag
 
 class CategoryForm(forms.ModelForm):
     class Meta:
@@ -27,6 +27,16 @@ class ProductoCreateForm(forms.ModelForm):
 class ProductoUpdateForm(forms.ModelForm):
     class Meta:
         model = Product
+        fields = '__all__'
+
+class TagCreateForm(forms.ModelForm):
+    class Meta:
+        model = Tag
+        fields = '__all__'
+
+class TagUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Tag
         fields = '__all__'
 
 # class ProductResgister(forms.Form):

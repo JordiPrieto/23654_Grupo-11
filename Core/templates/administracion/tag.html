@@ -1,0 +1,45 @@
+{% extends 'administracion/base.html' %}
+{% load static%}
+{% block titulo %}Etiquetas{% endblock%}
+
+{% block contenido %}
+<nav aria-label="breadcrumb" style="margin-top:15px;">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{%url 'administracion'%}">Administracion</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Etiqueta</li>
+    </ol>
+  </nav>
+
+<div class="card" style="margin-top:15px;">
+    <div class="card-body">
+        <a name="" id="" class="btn btn-success" href="{%url 'tag_nuevo'%}" role="button"> <i class="fa-solid fa-circle-plus"></i> Nuevo</a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Activo</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for etiqueta in tag %}
+                    <tr>
+                        <td>{{etiqueta.id}}</td>
+                        <td>{{etiqueta.tag_name}}</td>
+                        <td>{{etiqueta.active}}</td>
+                        <td>
+                            <a href="{%url 'tag_editar' etiqueta.id%}" title="Editar" class="btn btn-primary"><i class="fas fa-pencil"></i></a>
+                            <a href="{%url 'tag_eliminar' etiqueta.id%}" title="Eliminar" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer text-muted">
+        Etiquetas
+    </div>
+</div>
+{% endblock %}

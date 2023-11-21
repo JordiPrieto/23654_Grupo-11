@@ -14,4 +14,9 @@ path('producto',views.ProductListView.as_view(),name='producto'),
 path('producto/nuevo',views.ProductoCreateView.as_view(),name='producto_nuevo'),
 path('producto/editar/<int:pk>',views.ProductUpdateView.as_view(),name='producto_editar'),
 path('producto/eliminar/<int:pk>',views.ProductDeleteView.as_view(),name='producto_eliminar'),
+
+path('etiqueta',views.TagListView.as_view(),name='tag'),
+path('etiqueta/nuevo',views.TagCreateView.as_view(),name='tag_nuevo'),
+path('etiqueta/editar/<int:pk>',views.TagUpdateView.as_view(),name='tag_editar'),
+path('etiqueta/eliminar/<int:pk>',views.TagDeleteView.as_view(),name='tag_eliminar'),
 ]

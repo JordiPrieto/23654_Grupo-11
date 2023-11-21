@@ -1,0 +1,27 @@
+{% extends 'administracion/base.html' %}
+{% block titulo %}Nueva etiqueta{% endblock%}
+
+{% block contenido %}
+<h1 class="mt-4">Etiquetas</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item"><a href="{% url 'producto' %}">Administracion</a></li>
+    <li class="breadcrumb-item active">Nueva Etiqueta</li>
+</ol>
+
+
+<div class="card">
+    <div class="card-header">Creacion de Etiqueta</div>
+    <div class="card-body">
+        <form method="post" class="needs-validation" novalidate>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="row mt-3">
+                <div class="col-12">
+                    <button type="submit" class="btn btn-success">Guardar</button>
+                    <a href="{% url 'tag' %}" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

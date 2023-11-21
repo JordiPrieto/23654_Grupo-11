@@ -3,7 +3,7 @@ from administracion.models import Category,Product,Tag,Employee,Client
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView
 from django.urls import reverse_lazy
 from django.http import HttpRequest, HttpResponse
-from .forms import CategoryForm,CategoriaForm,ProductoCreateForm,ProductoUpdateForm
+from .forms import CategoryForm,CategoriaForm,ProductoCreateForm,ProductoUpdateForm,TagCreateForm,TagUpdateForm
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.views.generic import TemplateView
 # Create your views here.
@@ -82,6 +82,45 @@ class ProductDeleteView(PermissionRequiredMixin,DeleteView):
     template_name = 'administracion/producto_eliminar.html'
     permission_required = 'administracion'
     success_url = reverse_lazy('producto')
+
+    def handle_no_permission(self):
+        return redirect('login')
+    
+class TagListView(PermissionRequiredMixin,ListView):
+    model = Tag
+    template_name = 'administracion/tag.html'
+    permission_required = 'administracion'
+    context_object_name = 'tag'
+    
+    def handle_no_permission(self):
+        return redirect('login')
+    
+class TagCreateView(PermissionRequiredMixin,CreateView):
+    model = Tag
+    template_name = 'administracion/tag_nuevo.html'
+    permission_required = 'administracion'
+    form_class = TagCreateForm
+    success_url = reverse_lazy('tag')
+
+    def handle_no_permission(self):
+        return redirect('login')
+    
+    
+class TagUpdateView(PermissionRequiredMixin,UpdateView):
+    model = Tag
+    template_name = 'administracion/tag_editar.html'
+    permission_required = 'administracion'
+    form_class = TagUpdateForm
+    success_url = reverse_lazy('tag')
+
+    def handle_no_permission(self):
+        return redirect('login')
+
+class TagDeleteView(PermissionRequiredMixin,DeleteView):
+    model = Tag
+    template_name = 'administracion/tag_eliminar.html'
+    permission_required = 'administracion'
+    success_url = reverse_lazy('tag')
 
     def handle_no_permission(self):
         return redirect('login')
