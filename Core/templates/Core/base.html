@@ -18,23 +18,36 @@
     <!-- navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white py-4 ">
         <div class="container">
-            <a class="navbar-brand d-flex justify-content-between align-items-center order-lg-0" href="{% url "index" %}"><img src="{% static 'Core/img/faviconorange.svg' %}" alt="site icon" >
+            <a class="navbar-brand d-flex justify-content-between align-items-center order-lg-0" href="{% url 'index' %}"><img src="{% static 'Core/img/faviconorange.svg' %}" alt="site icon" >
             <span>BaxTech</span></a>
             <div class="order-lg-2 nav-btns">
+                {% if user.is_authenticated %}
+                <p type="text">{{CustomUser.username}}</p>
+                <a href="{% url 'logout' %}" class="text-decoration-none">
+                    <button type="button" class="btn btn-light">
+                        <i class="fa-solid fa-unlock"></i>
+                        <span>Cerrrar sesion</span>
+                    </button>
+                {%else%}
+                <a href="{% url 'login' %}" class="text-decoration-none">
                 <button type="button" class="btn btn-light" style="background-color:#f9864d;">
                     <i class="fa-solid fa-user"></i>
                     <span>Iniciar sesion</span>
                 </button>
+                </a>
                 <button type="button" class="btn btn-dark">
                     <i class="fa-solid fa-user"></i>
                     <span>Registrarse</span>
                 </button>
-                <a href="{% url 'categoria' %}">
-                <button type="button" class="btn btn-light">
+                {%endif%}
+                {% if perms.administracion %}
+                <a href="{% url 'administracion' %}">
+                <button type="button" class="btn btn-warning">
                     <i class="fa-solid fa-unlock"></i>
                     <span>Admin</span>
                 </button>
                 </a>
+                {%endif%}
             </div>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle ="collapse" data-bs-target="#navMenu">
                 <span class="navbar-toggler-icon"></span>

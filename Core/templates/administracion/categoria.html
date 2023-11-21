@@ -5,7 +5,7 @@
 {% block contenido %}
 <nav aria-label="breadcrumb" style="margin-top:15px;">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="{%url 'categoria'%}">Administracion</a></li>
+      <li class="breadcrumb-item"><a href="{%url 'administracion'%}">Administracion</a></li>
       <li class="breadcrumb-item active" aria-current="page">Categorias</li>
     </ol>
   </nav>
@@ -18,7 +18,7 @@
                 <tr>
                     <th>Id</th>
                     <th>Nombre</th>
-                    <th>Tag</th>
+                    <th>Etiqueta</th>
                     <th>Activo</th>
                     <th>Acciones</th>
                 </tr>
@@ -37,7 +37,7 @@
                         <td>{{categoria.active}}</td>
                         <td>
                             <a href="{%url 'categorias_editar' categoria.id%}" title="Editar" class="btn btn-primary"><i class="fas fa-pencil"></i></a>
-                            <a href="#" title="Eliminar" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                            <a href="{%url 'categorias_eliminar' categoria.id%}" title="Eliminar" class="btn btn-danger"><i class="fas fa-trash"></i></a>
                         </td>
                     </tr>
                 {% endfor %}

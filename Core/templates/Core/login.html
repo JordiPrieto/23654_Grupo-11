@@ -4,11 +4,11 @@
     <link rel="stylesheet" href="{% static 'Core/css/login.css' %}">
 {% endblock %}
 {% block main_content %}
-{% block title %}User's login{% endblock %}
-{% block section_title %} Log into your account {% endblock %}
+{% comment %} {% block title %}User's login{% endblock %}
+{% block section_title %} Log into your account {% endblock %} {% endcomment %}
 {% block content %}
 
-    <form method="post" action="{% url 'login' %}">
+    {% comment %} <form method="post" action="{% url 'login' %}">
         {% csrf_token %}
         <table>
             <tr>
@@ -23,7 +23,62 @@
 
         <input type="submit" value="login">
         <input type="hidden" name="next" value="{{ next }}">
-    </form>
+    </form> {% endcomment %}
 
+    <div class="container-lg align-content-center w-25 mb-3 mt-3" >
+        <div class="">
+            {% if messages %}
+                <div class="messages">
+                    {% for message in messages %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <!-- Email input -->
+            <div class=" mb-4 mt-5">   
+              <div class="form-group">
+                {{ form.username.label_tag }}
+                <input type="text" name="{{ form.username.name }}" class="form-control" id="{{ form.username.id_for_label }}" value="{{ form.username.value|default:'' }}">
+                {% if form.username.errors %}
+                        <small class="text-danger">{{ form.username.errors.0 }}</small>
+                {% endif %}
+                </div>
+            </div>
+      
+            <!-- Password input -->
+            <div class="mb-4">
+                <div class="form-group">
+                    {{ form.password.label_tag }}
+                    <input type="password" name="{{ form.password.name }}" class="form-control" id="{{ form.password.id_for_label }}">
+                    {% if form.password.errors %}
+                        <small class="text-danger">{{ form.password.errors.0 }}</small>
+                    {% endif %}
+                </div>
+            </div>
+      
+            <!-- 2 column grid layout -->
+            <div class="row mb-4">
+             
+      
+              
+                <!-- Simple link -->
+                <a href="#!">Forgot password?</a>
+              </div>
+            </div>
+      
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+      
+            <!-- Register buttons -->
+            <div class="text-center">
+              <p>Not a member? <a href="#!">Register</a></p>
+            </div>
+          </form>
+        </div>
+    </div>
 {% endblock content %}
 {% endblock main_content %}

@@ -4,6 +4,7 @@ from django.views.generic.list import ListView
 from Core.forms import ContactForm
 from django.contrib import messages
 from .models import Consulta
+from django.contrib.auth.views import LoginView
 # from .forms import ProductResgister, RegisterCategory
 # from .models import Category
 
@@ -12,6 +13,8 @@ from .models import Consulta
 def index(request):
     return render(request,'Core/index.html')
 
+def profile(request):
+    return render(request, 'Core/profile.html')
 
 def productos(request):
     return render(request,'Core/productos.html')
@@ -37,6 +40,19 @@ def contacto(request):
             consulta.save()
             messages.success(request,'Hemos recibido tu consulta')
     return render(request,'Core/contacto.html',{"contact_form":formulario_contacto})
+
+
+
+class CustomLoginView(LoginView):
+    template_name = 'core/login.html'  # Tu plantilla personalizada
+
+    def form_invalid(self, form):
+        # Añade un mensaje de error a través de Django messages framework
+        messages.error(self.request, 'Usuario o contraseña incorrectos. Por favor, inténtalo de nuevo.')
+
+        # Puedes personalizar aún más el comportamiento aquí, si es necesario
+        return super().form_invalid(form)
+
 # def register_product(request):
 #     if request.method == "POST":
 #         form =ProductResgister(request.POST)
