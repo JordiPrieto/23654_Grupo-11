@@ -1,10 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
 from Core.forms import ContactForm
 from django.contrib import messages
 from .models import Consulta
 from django.contrib.auth.views import LoginView
+from .forms import RegisterForm
 # from .forms import ProductResgister, RegisterCategory
 # from .models import Category
 
@@ -53,6 +54,16 @@ class CustomLoginView(LoginView):
         # Puedes personalizar aún más el comportamiento aquí, si es necesario
         return super().form_invalid(form)
 
+
+def register(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("/")
+    else:
+        form = RegisterForm()
+    return render(request,"Core/register.html",{"form":form})
 # def register_product(request):
 #     if request.method == "POST":
 #         form =ProductResgister(request.POST)

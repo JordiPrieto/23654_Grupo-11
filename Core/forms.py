@@ -1,5 +1,8 @@
 from django import forms
 from django.core.exceptions import ValidationError
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from Core.models import CustomUser
 
 def solo_caracteres(value):
     if any(char.isdigit() for char in value):
@@ -12,7 +15,10 @@ class ContactForm(forms.Form):
     asunto = forms.CharField(label="Asunto", max_length=20, required=True,widget=forms.TextInput(attrs={'class':'form-control'}))
     mensaje = forms.CharField(label="Mensaje",widget=forms.Textarea(attrs={'rows': 5, 'cols': 40,'class':'form-control'}))
 
-
+class RegisterForm(UserCreationForm):
+    class Meta:
+        model = CustomUser
+        fields = ["username", "email", "password1", "password2"]
 
 
 

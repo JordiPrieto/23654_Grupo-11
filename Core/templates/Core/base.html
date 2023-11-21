@@ -39,10 +39,12 @@
                     <span>Iniciar sesion</span>
                 </button>
                 </a>
+                <a href="{% url 'register' %}" class="text-decoration-none">
                 <button type="button" class="btn btn-dark">
                     <i class="fa-solid fa-user"></i>
                     <span>Registrarse</span>
                 </button>
+                </a>
                 {%endif%}
                 {% if perms.administracion %}
                 <a href="{% url 'producto' %}">
