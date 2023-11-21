@@ -22,7 +22,11 @@
             <span>BaxTech</span></a>
             <div class="order-lg-2 nav-btns">
                 {% if user.is_authenticated %}
-                <p type="text">{{CustomUser.username}}</p>
+                <a href="{% url 'profile' %}" class="text-decoration-none">
+                <button type="button" class="btn btn-success">
+                    <i class="fa-solid fa-user"></i>
+                    <span>{{user.username}}</span>
+                </button>
                 <a href="{% url 'logout' %}" class="text-decoration-none">
                     <button type="button" class="btn btn-light">
                         <i class="fa-solid fa-unlock"></i>
