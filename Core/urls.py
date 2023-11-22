@@ -13,14 +13,7 @@ urlpatterns = [
     path('register',views.register,name="register"),
     
 
-    path('productos/',views.productos,name='productos'),
-    path('productos/producto/<producto_id>', views.producto, name='producto'),
+    path('productos/',views.producto,name='productos'),
     path('contacto/',views.contacto,name='contacto')
-    # path('productos/registrar_producto', views.register_product, name='register_product_form'),
 
-    # path('category_form', views.CategoryCreateView.as_view(), name="category_form"),
-    # path('category_list', views.CategoryListView.as_view(), name='category_list')
-
-    # path('productos/<int:id>',views.productos_id,name='productos_id'),
-    # path('contacto/',views.contacto,name='contacto')
 ]

@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'Core',
     'administracion',
     'django_extensions',
-    'crispy_forms'
 ]
 
 MIDDLEWARE = [
@@ -141,4 +140,3 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 AUTH_USER_MODEL = 'Core.CustomUser'
 
-CRISPY_TEMPLATE_PACK="bootstrap4"

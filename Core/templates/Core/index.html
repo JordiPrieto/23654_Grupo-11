@@ -23,7 +23,7 @@
         </button>
     </header>
     <!-- end header -->
-    <!-- special products -->
+    {% comment %} <!-- special products -->
     <section class="py-5" id="special">
         <div class="container">
             <div class="title text-center py-5">
@@ -42,5 +42,30 @@
             </div>
         </div>
     </section>
-    <!-- end special products -->
+    <!-- end special products --> {% endcomment %}
+    <!-- special products -->
+<!-- special products -->
+<section class="py-5" id="special">
+    <div class="container">
+        <div class="title text-center py-5">
+            <h2 class="position-relative d-inline-block">Destacados</h2>
+        </div>
+        <div class="special-list row g-0">
+            {% for producto in productos_destacados %}
+                <div class="col-md-6 col-lg-4 col-xl-3 p-2 card">
+                    <div class="collection-img">
+                        <img class="w-100" src="{{ producto.image.url }}" alt="{{ producto.prod_name }}">
+                    </div>
+                    <div class="text-center border-top">
+                        <p class="text-capitalize my-1"><a href="#" class="stretched-link text-reset text-decoration-none">{{ producto.prod_name }}</a></p>
+                        <span class="fw-bold">${{ producto.price }}</span>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!-- end special products -->
+
+
 {% endblock main_content %}

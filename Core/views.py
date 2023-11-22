@@ -6,24 +6,39 @@ from django.contrib import messages
 from .models import Consulta
 from django.contrib.auth.views import LoginView
 from .forms import RegisterForm
+from administracion.models import Product
 # from .forms import ProductResgister, RegisterCategory
 # from .models import Category
 
 # Create your views here.
 
 def index(request):
-    return render(request,'Core/index.html')
+    productos_destacados = Product.objects.filter(product_tags__tag_name='destacado')
+    # Pasa los productos destacados al contexto
+    context = {
+        'productos_destacados': productos_destacados
+    }
+
+    return render(request, 'Core/index.html', context)
 
 def profile(request):
     return render(request, 'Core/profile.html')
 
-def productos(request):
-    return render(request,'Core/productos.html')
 
-def producto(request, producto_id):
+def producto(request):
+    tag_filtro = request.GET.get('tag', None)
+
+    # Filtra los productos según el tag (si hay un tag)
+    if tag_filtro:
+        productos_filtrados = Product.objects.filter(product_tags__tag_name=tag_filtro)
+    else:
+        # Si no hay tag seleccionado, muestra todos los productos
+        productos_filtrados = Product.objects.all()
+
     context = {
-        'producto_id' : producto_id
-        }
+        'productos_filtrados': productos_filtrados,
+    }
+
     return render(request, 'Core/producto.html', context)
 
 def contacto(request):
@@ -45,13 +60,10 @@ def contacto(request):
 
 
 class CustomLoginView(LoginView):
-    template_name = 'core/login.html'  # Tu plantilla personalizada
+    template_name = 'core/login.html' 
 
     def form_invalid(self, form):
-        # Añade un mensaje de error a través de Django messages framework
         messages.error(self.request, 'Usuario o contraseña incorrectos. Por favor, inténtalo de nuevo.')
-
-        # Puedes personalizar aún más el comportamiento aquí, si es necesario
         return super().form_invalid(form)
 
 
@@ -64,29 +76,5 @@ def register(request):
     else:
         form = RegisterForm()
     return render(request,"Core/register.html",{"form":form})
-# def register_product(request):
-#     if request.method == "POST":
-#         form =ProductResgister(request.POST)
-#     else:
-#         form =ProductResgister()
-    
-#     context = {
-#         'register_product': form
-#     }
-#     return render(request, "Core/register_product.html", context)
-
-# # class CategoryCreateView(CreateView):
-# #     model = Category
-# #     context_object_name = 'category_form'
-# #     template_name = 'Core/category_form.html'
-# #     success_url = 'category_list'
-# #     form_class = RegisterCategory
-# #     # fields = '__all__'
 
 
-# # class CategoryListView(ListView):
-# #     model = Category
-# #     context_object_name = "category_list"
-# #     template_name = 'Core/category_list.html'
-# #     ordering = ['category_name']
-# #     # systems_count = ListView.__sizeof__

@@ -10,25 +10,19 @@ from django.views.generic import TemplateView
 
 class AdministracionView(PermissionRequiredMixin, TemplateView):
     template_name = 'administracion/base.html'
-    permission_required = 'administracion'  # Debes definir el nombre del permiso específico
+    permission_required = 'administracion'
 
     def handle_no_permission(self):
-        # Personaliza el comportamiento cuando el usuario no tiene permisos
-        # En este ejemplo, redirigimos al usuario a la página de inicio
         return redirect('login')
-# def index(request):
-#     return render(request,'administracion/base.html')
+
 
 def categorias_index(request):
     categorias = Category.objects.all()
-
-    # if 'nombre' in request.GET:
-    #     categorias = categorias.filter(nombre__contains=request.GET['nombre'])
     return render(request, 'administracion/categoria.html', {'categorias': categorias})
 
 class CategoryCreateView(PermissionRequiredMixin,CreateView):
     model = Category
-    form_class = CategoryForm  # Usa el formulario que defines en forms.py
+    form_class = CategoryForm 
     template_name = 'administracion/categoria_nuevo.html'
     permission_required = 'administracion'
     success_url = reverse_lazy('categoria')
